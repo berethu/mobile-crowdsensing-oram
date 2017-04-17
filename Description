@@ -1,0 +1,36 @@
+Description:
+sPASS system with HE (U) as the top layer with each containing V ORAM
+
+To Compile:
+
+g++ -std=c++1y -o runExperiment -L/usr/lib/ runExperiment.cpp HashFunc/hashFunc.cpp oramNew/src/AES.cpp oramNew/src/ArraySystem.cpp oramNew/src/File.cpp oramNew/src/FileSystem.cpp oramNew/src/Log.cpp oramNew/src/ORAM.cpp oramNew/src/Position.cpp oramNew/src/RAMStore.cpp oramNew/src/Stash.cpp oramNew/src/Timer.cpp -lssl -lcrypto -lgmp -lpaillier
+
+To run:
+./runExperiment 40
+where 40 is the value of U i.e super partition
+
+Variables can be changed from the runExperiment.cpp except for the value of n i.e no of partition which can be modified in HashFunc/hashFunc.h with variable name partitionSize
+Results are saved in a file called simulationRes+U.txt e.g simulationRes40.txt
+
+
+
+<-- Functions in main-->
+
+AggregateRequest: wrapper for ORAM operation
+MBtoDepth: Converts megabyte to depth of tree for ORAM
+Profile: Profiler for time
+WriteNumToORAM: gets the input from AggregateRequest and produces position map and stash which is usually empty
+DynamicCommit: Commit strategy that takes into account current request
+StaticCommit: Commit strategy based on historical request
+EvictOSP: Overflowing super partition eviction optimization
+set_error: error function for permutation
+odometer: measuring the number of loops for benes
+benesNetwork1: Benes Network permutation function
+bitIndex: Bit index function for Benes network
+shuffleBenes: Shuffling benes network
+benesNetworkPerm: wrapper for benes network permutation
+benesParity: Benes network parity
+compress: LZW compression function
+decompress: LZW decompression function
+
+
